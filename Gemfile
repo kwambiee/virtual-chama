@@ -46,3 +46,6 @@ group :development do
   # gem "spring"
 end
 
+gem 'jwt'
+gem 'pry', '~> 0.13.1'
+
