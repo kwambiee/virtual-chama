@@ -4,6 +4,10 @@ class CreateChamas < ActiveRecord::Migration[7.0]
       t.string :name
       t.string :reg_no
       t.string :logo_url
+      t.string :username
+      t.string :email
+      t.string :password_digest
+      t.string :phone
 
       t.timestamps
     end
