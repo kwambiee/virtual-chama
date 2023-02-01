@@ -5,10 +5,8 @@ class CreateChamas < ActiveRecord::Migration[7.0]
       t.string :reg_no
       t.string :logo_url
       t.string :username
-      t.string :email
-      t.string :password_digest
-      t.string :phone
       t.integer :status, default: 0
+      t.references :user, type: :uuid, foreign_key: {to_table: :users }
 
       t.timestamps
     end

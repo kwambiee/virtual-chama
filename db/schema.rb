@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_29_123107) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_01_172848) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
@@ -20,12 +20,22 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_29_123107) do
     t.string "reg_no"
     t.string "logo_url"
     t.string "username"
+    t.integer "status", default: 0
+    t.uuid "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_chamas_on_user_id"
+  end
+
+  create_table "users", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "phone"
     t.string "email"
     t.string "password_digest"
-    t.string "phone"
-    t.integer "status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "chamas", "users"
 end
