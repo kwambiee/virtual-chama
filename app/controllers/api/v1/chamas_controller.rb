@@ -1,13 +1,4 @@
-class ChamasController < ApplicationController
-  before_action :set_chama, only: %i[ show update destroy ]
-
-  # GET /chamas
-  def index
-    @chamas = Chama.all
-
-    render json: @chamas
-  end
-
+class Api::V1::ChamasController < ApplicationController
   # GET /chamas/1
   def show
     render json: @chama
@@ -15,7 +6,7 @@ class ChamasController < ApplicationController
 
   # POST /chamas
   def create
-    @chama = Chama.new(chama_params)
+    # @chama = Chama.new(chama_params)
 
     if @chama.save
       render json: @chama, status: :created, location: @chama
@@ -38,6 +29,17 @@ class ChamasController < ApplicationController
     @chama.destroy
   end
 
+  def Login
+        @chama = Chama.find_by(email: params[:email])
+        if @chama&.authenticate(params[:password])
+            token = jwt_encode(chama_id: @chama.id)
+            render json: { token: token }, status: :ok
+        else
+            render json: { error: 'unauthorized' }, status: :unauthorized
+        end
+
+    end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_chama
@@ -45,7 +47,7 @@ class ChamasController < ApplicationController
     end
 
     # Only allow a list of trusted parameters through.
-    def chama_params
-      params.require(:chama).permit(:name, :reg_no, :logo_url)
-    end
+    # def chama_params
+    #   params.require(:chama).permit(:name, :reg_no, :logo_url)
+    # end
 end

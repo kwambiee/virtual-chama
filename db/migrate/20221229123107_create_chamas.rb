@@ -8,6 +8,7 @@ class CreateChamas < ActiveRecord::Migration[7.0]
       t.string :email
       t.string :password_digest
       t.string :phone
+      t.integer :status, default: 0
 
       t.timestamps
     end
