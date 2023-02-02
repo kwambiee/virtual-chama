@@ -9,7 +9,7 @@ class ApplicationController < ActionController::API
         header = request.headers['Authorization']
         header = header.split(' ').last if header
         decoded = jwt_decode(header)
-        @current_chama = Chama.find(decoded[:chama_id])
+        @current_user = User.find(decoded[:user_id])
     rescue
         render json: { error: 'unauthorized' }, status: :unauthorized
     end
