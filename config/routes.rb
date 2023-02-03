@@ -3,15 +3,10 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       resources :chamas, only: [:show, :create, :update, :destroy]
-      resources :users do
-        member do
-          get :confirm_email
-        end
-      end
+      resources :users 
     end
   end
 
   get "email_verification/:token", to: "login#email_verification", as: :email_verification
-
 
 end

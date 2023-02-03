@@ -10,20 +10,10 @@ class Api::V1::UsersController < ApplicationController
       @user = User.new(user_params)
       if @user.save
         UserMailer.with(user: @user).verification.deliver_later
-        render json: @user, status: :created
+        render json: {message: "Please confirm your email address to continue" }, status: :created
       else
         render json: @user.errors, status: :unprocessable_entity
       end
-    end
-
-    def confirm_email
-        user = User.find_by_confirm_token(params[:id])
-        if user
-          user.verified!
-          redirect_to "https://google.com"
-        else
-          redirect_to "https://github.com/kwambiee/virtual-chama"
-        end
     end
 
     private

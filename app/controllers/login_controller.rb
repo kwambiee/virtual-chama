@@ -4,8 +4,13 @@ class LoginController < ApplicationController
     def login
         @user = User.find_by(email: params[:email])
         if @user&.authenticate(params[:password])
-            token = jwt_encode(user_id: @user.id)
-            render json: { token: token }, status: :ok
+            if @user.verified?
+                token = jwt_encode(user_id: @user.id)
+                render json: { token: token }, status: :ok
+            else
+                render json: { error: 'Please verify your account by following the 
+        instructions in the account confirmation email you received to proceed' }, status: :unauthorized
+            end
         else
             render json: { error: 'unauthorized' }, status: :unauthorized
         end
