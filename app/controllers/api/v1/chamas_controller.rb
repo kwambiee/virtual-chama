@@ -7,8 +7,10 @@ class Api::V1::ChamasController < ApplicationController
 
   # POST /chamas
   def create
+    @chama = Chama.new(chama_params)
+    @chama.admin = @current_user
     if @chama.save
-      render json: @chama, status: :created, location: @chama
+      render json: @chama, status: :created
     else
       render json: @chama.errors, status: :unprocessable_entity
     end
@@ -33,6 +35,6 @@ class Api::V1::ChamasController < ApplicationController
     end
 
     def chama_params
-      params.require(:chama).permit(:name, :reg_no, :logo_url)
+      params.require(:chama).permit(:name, :reg_no, :username, :logo_url)
     end
 end

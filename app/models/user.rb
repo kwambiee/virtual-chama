@@ -5,6 +5,8 @@ class User < ApplicationRecord
     has_secure_password
 
     has_many :created_chamas, inverse_of: :admin, class_name: 'Chama'
+    has_many :chamas, through: :chama_memberships
+
     enum :status, { unverified: 0, verified: 1 }
     validates :first_name, :last_name, :phone, :email, presence: true
     validates :phone, :email, uniqueness: true
