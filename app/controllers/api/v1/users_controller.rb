@@ -19,13 +19,10 @@ class Api::V1::UsersController < ApplicationController
     def confirm_email
         user = User.find_by_confirm_token(params[:id])
         if user
-          user.email_activate
-          flash[:success] = "Welcome to the Sample App! Your email has been confirmed.
-          Please sign in to continue."
-          redirect_to signin_url
+          user.verified!
+          redirect_to "https://google.com"
         else
-          flash[:error] = "Sorry. User does not exist"
-          redirect_to root_url
+          redirect_to "https://github.com/kwambiee/virtual-chama"
         end
     end
 
