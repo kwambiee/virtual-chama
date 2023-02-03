@@ -6,7 +6,7 @@
   <body>
     <h1>Hi, <%= @user.first_name %></h1>
     <p>Thanks for registering! To confirm your registration click the URL below.
-      <%= confirm_email_api_v1_user_url(@user.confirm_token) %>
+      <%= email_verification(@user.confirm_token) %>
     </p>
   </body>
 </html>
