@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     end
   end
 
-  get "email_verification/:token", to: "application#email_verification", as: :email_verification
+  get "email_verification/:token", to: "login#email_verification", as: :email_verification
 
 
 end

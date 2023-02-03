@@ -10,4 +10,14 @@ class LoginController < ApplicationController
             render json: { error: 'unauthorized' }, status: :unauthorized
         end
     end
+
+    def email_verification
+        user = User.find_by_confirm_token(params[:token])
+        if user
+          user.verified!
+          redirect_to "https://google.com", allow_other_host: true
+        else
+          redirect_to "https://github.com/kwambiee/virtual-chama", allow_other_host: true
+        end
+    end
 end
