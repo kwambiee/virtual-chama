@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-    require "securerandom"
+    # require "securerandom"
 
     before_create :confirmation_token
     has_secure_password
