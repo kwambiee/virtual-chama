@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
-  resources :chamas
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-  # root "articles#index"
+  post 'login', to: 'login#login'
+  namespace :api, defaults: { format: :json } do
+    namespace :v1 do
+      resources :chamas, only: [:show, :create, :update, :destroy]
+    end
+  end
 end
