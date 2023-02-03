@@ -16,8 +16,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_03_111622) do
   enable_extension "uuid-ossp"
 
   create_table "chama_memberships", force: :cascade do |t|
-    t.bigint "chama_id"
-    t.bigint "user_id"
+    t.uuid "user_id"
+    t.uuid "chama_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["chama_id"], name: "index_chama_memberships_on_chama_id"
@@ -49,5 +49,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_03_111622) do
     t.string "confirm_token"
   end
 
+  add_foreign_key "chama_memberships", "chamas"
+  add_foreign_key "chama_memberships", "users"
   add_foreign_key "chamas", "users"
 end
