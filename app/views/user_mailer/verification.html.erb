@@ -4,10 +4,9 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>Welcome to Virtual Chama, <%= @user.first_name %></h1>
-    <p>
-      Please verify your email before we proceed
+    <h1>Hi, <%= @user.first_name %></h1>
+    <p>Thanks for registering! To confirm your registration click the URL below.
+      <%= confirm_email_api_v1_user(@user.confirm_token) %>
     </p>
-    <p>Thanks for joining and have a great day!</p>
   </body>
 </html>
