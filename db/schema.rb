@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_03_111622) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_06_055114) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
@@ -20,6 +20,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_03_111622) do
     t.uuid "chama_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "status", default: 0
     t.index ["chama_id"], name: "index_chama_memberships_on_chama_id"
     t.index ["user_id"], name: "index_chama_memberships_on_user_id"
   end
