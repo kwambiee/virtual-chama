@@ -34,6 +34,7 @@ class Api::V1::ChamasController < ApplicationController
   end
 
 
+
   private
     def set_chama
       @chama = Chama.find(params[:id])

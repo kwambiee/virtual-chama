@@ -15,7 +15,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_06_055114) do
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
 
-  create_table "chama_memberships", force: :cascade do |t|
+  create_table "chama_memberships", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.uuid "user_id"
     t.uuid "chama_id"
     t.datetime "created_at", null: false

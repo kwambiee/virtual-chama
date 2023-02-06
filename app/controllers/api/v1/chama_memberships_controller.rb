@@ -19,18 +19,21 @@ class Api::V1::ChamaMemberships < ApplicationController
 
     def update
         @chama_membership = ChamaMembership.find(params[:id])
-        if params[:status] == "approved"
-            @chama_membership.update(status: "approved")
-            UserMailer.with(user: @chama_membership.user, chama: @chama_membership.chama).chama_membership_approved.deliver_later
-            render json: @chama_membership, status: :created
-        elsif params[:status] == "rejected"
-            @chama_membership.update(status: "rejected")
-            UserMailer.with(user: @chama_membership.user, chama: @chama_membership.chama).chama_membership_rejected.deliver_later
-            render json: @chama_membership, status: :created
+        if @chama_membership.chama.is_admin?(@current_user)
+            if params[:status] == "approved"
+                @chama_membership.update(status: "approved")
+                UserMailer.with(user: @chama_membership.user, chama: @chama_membership.chama).chama_membership_approved.deliver_later
+                render json: @chama_membership, status: :created
+            elsif params[:status] == "rejected"
+                @chama_membership.update(status: "rejected")
+                UserMailer.with(user: @chama_membership.user, chama: @chama_membership.chama).chama_membership_rejected.deliver_later
+                render json: @chama_membership, status: :created
+            else
+                render json: @chama_membership.errors, status: :unprocessable_entity
+            end
         else
-            render json: @chama_membership.errors, status: :unprocessable_entity
+            render json: {error: "You are not authorized to perform this action"}, status: :unauthorized
         end
-
 
     end
 
