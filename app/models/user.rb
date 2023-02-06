@@ -4,7 +4,9 @@ class User < ApplicationRecord
     before_create :confirmation_token
     has_secure_password
 
+    # for user/admin that has created chamas, to identify all chamas they have created
     has_many :created_chamas, inverse_of: :admin, class_name: 'Chama'
+    # for members who have joined chamas, to identify all chamas they have joined
     has_many :chamas, through: :chama_memberships
 
     enum :status, { unverified: 0, verified: 1 }

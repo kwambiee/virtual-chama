@@ -1,4 +1,8 @@
-class Api::V1::ChamasController < ApplicationController  
+class Api::V1::ChamasController < ApplicationController
+
+  def index
+    @chamas = Chama.all
+  end
 
   # GET /chamas/1
   def show
@@ -28,6 +32,7 @@ class Api::V1::ChamasController < ApplicationController
   def destroy
     @chama.destroy
   end
+
 
   private
     def set_chama
