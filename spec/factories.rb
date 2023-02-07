@@ -15,4 +15,9 @@ FactoryBot.define do
         username { Faker::Internet.username }
     end
 
+    factory :chama_memberships do
+        association :user
+        association :chama
+    end
+
 end

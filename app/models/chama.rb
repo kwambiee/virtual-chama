@@ -6,6 +6,7 @@ class Chama < ApplicationRecord
 
     belongs_to :admin, class_name: 'User', inverse_of: :created_chamas, foreign_key: :user_id
 
+    has_many :chama_memberships
     has_many :users, through: :chama_memberships
 
     def is_admin?(user)

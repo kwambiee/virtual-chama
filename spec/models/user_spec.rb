@@ -14,4 +14,9 @@ RSpec.describe User, type: :model do
             it { should validate_uniqueness_of(field) }
         end
     end
+
+    describe "Associations" do
+        it {should have_many(:created_chamas).class_name('Chama')}
+        it {should have_many(:chamas).through(:chama_memberships)}
+    end
 end
