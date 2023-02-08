@@ -6,6 +6,7 @@ FactoryBot.define do
         email { Faker::Internet.email }
         password { Faker::Internet.password }
         avatar_url { Faker::Avatar.image }
+        status {1}
     end
 
     factory :chama do

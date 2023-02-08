@@ -8,7 +8,7 @@ class LoginController < ApplicationController
                 token = jwt_encode(user_id: @user.id)
                 render json: { token: token }, status: :ok
             else
-                render json: { error: 'Please verify your account by following the
+                render json: { message: 'Please verify your account by following the
         instructions in the account confirmation email you received to proceed' }, status: :unauthorized
             end
         else
