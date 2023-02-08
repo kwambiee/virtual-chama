@@ -17,7 +17,7 @@ module ApiHelper
     end
 
     def register_request(url, params)
-        post url, params: params.to_json
+        post url, params: params.to_h
     end
 
     def log_in(user)
