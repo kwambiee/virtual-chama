@@ -4,6 +4,7 @@ class Api::V1::UsersController < ApplicationController
 
 
     def show
+      @chamas = @current_user.chamas
         render json: @user
     end
 

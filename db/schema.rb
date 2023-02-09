@@ -22,6 +22,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_06_055114) do
     t.datetime "updated_at", null: false
     t.integer "status", default: 0
     t.index ["chama_id"], name: "index_chama_memberships_on_chama_id"
+    t.index ["user_id", "chama_id"], name: "index_chama_memberships_on_user_id_and_chama_id", unique: true
     t.index ["user_id"], name: "index_chama_memberships_on_user_id"
   end
 

@@ -1,4 +1,4 @@
-class Api::V1::ChamaMemberships < ApplicationController
+class Api::V1::ChamaMembershipsController < ApplicationController
 
     before_action :set_chama_membership, only: [:show, :update, :destroy]
 
@@ -7,7 +7,7 @@ class Api::V1::ChamaMemberships < ApplicationController
     end
 
     def create
-        @chama_membership = ChamaMembership.new(chama_membership_params)
+        @chama_membership = ChamaMembership.new(chama_id: params[:chama_id], user_id: @current_user.id)
         if @chama_membership.save
             UserMailer.with(user: @current_user, chama: @chama_membership.chama).chama_membership_request.deliver_later
             UserMailer.with(admin: @chama_membership.chama.admin, chama: @chama_membership.chama).admin_confirmation.deliver_later
@@ -42,10 +42,4 @@ class Api::V1::ChamaMemberships < ApplicationController
     def set_chama_membership
         @chama_membership = ChamaMembership.find(params[:id])
     end
-
-    def chama_membership_params
-        params.require(:chama_membership).permit(:user_id,:chama_id)
-    end
-
-
 end

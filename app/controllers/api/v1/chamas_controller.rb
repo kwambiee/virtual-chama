@@ -11,13 +11,13 @@ class Api::V1::ChamasController < ApplicationController
 
   # POST /chamas
   def create
-    # binding.pry
     @chama = Chama.new(chama_params)
     @chama.admin = @current_user
     if @chama.save
+      @chama_membership = ChamaMembership.new(chama: @chama, user: @current_user, status: 1)
+      @chama_membership.save
       render json: @chama, status: :created
     else
-      # binding.pry
       render json: @chama.errors, status: :unprocessable_entity
     end
   end
