@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Api::V1::UsersController, type: :request do
 
     before :each do
-        @user = User.create(first_name: 'John', last_name: 'Doe', phone: '0712345678', email:"John@gmail.com", password: "password",status: 1)
+        @user = create(:user)
         @token = log_in(@user)
     end
 
