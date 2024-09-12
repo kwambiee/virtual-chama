@@ -8,6 +8,10 @@ module ApiHelper
         }
     end
 
+    def json_body(response)
+      JSON.parse(response.body) 
+    end
+
     def get_request(url, token)
         get url, headers: headers(token)
     end

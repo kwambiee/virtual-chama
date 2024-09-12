@@ -23,7 +23,6 @@ RSpec.describe Api::V1::ChamasController, type: :request do
             post_request "/api/v1/chamas", token, {chama: chama_params}
             expect(response).to have_http_status(:created)
         end
-
     end
 
 

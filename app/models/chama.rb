@@ -1,5 +1,4 @@
 class Chama < ApplicationRecord
-
     validates :name, :username, :reg_no, presence: true
     validates :username, :reg_no, uniqueness: true
     enum :status, { unverified: 0, verified: 1 }

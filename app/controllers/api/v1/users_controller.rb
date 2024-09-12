@@ -2,7 +2,6 @@ class Api::V1::UsersController < ApplicationController
     skip_before_action :authenticate_request, only: [:create]
     before_action :set_user, only: [:show, :update, :destroy]
 
-
     def show
       @chamas = @current_user.chamas
         render json: @user

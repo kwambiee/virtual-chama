@@ -1,5 +1,4 @@
 class Api::V1::ChamaMembershipsController < ApplicationController
-
     before_action :set_chama_membership, only: [:show, :update, :destroy]
 
     def index

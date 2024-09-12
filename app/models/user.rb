@@ -11,8 +11,15 @@ class User < ApplicationRecord
     has_many :chamas, through: :chama_memberships
 
     enum :status, { unverified: 0, verified: 1 }
+    EMAIL_REGEX =^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$ 
+    
     validates :first_name, :last_name, :phone, :email, presence: true
     validates :phone, :email, uniqueness: true
+    validates_format_of :email, with: EMAIL_REGEX
+
+    def valid_email? email
+      email =~EMAIL_REGEX
+    end
 
     private
 
